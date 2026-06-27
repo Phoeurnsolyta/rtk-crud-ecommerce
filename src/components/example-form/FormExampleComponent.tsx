@@ -15,6 +15,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller} from "react-hook-form";
+import { z } from "zod";
+
+export const title = "Form with Optional Fields";
+
+const formSchema = z.object({
+  email:  z.string()
+    .email({ pattern: z.regexes.rfc5322Email })
+    .min(1, "Add at least one email address."),
+  password: z.string()
+  .min(8, "Add at least 8 digits")
+  .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, "At least 8 character, at least one uppercase English letter, at least one lowercase English letter, at least one digit and at least one specil character. ")
+});
 
 type formData = {
   email: string;
@@ -22,7 +36,7 @@ type formData = {
 };
 
 export default function FormExampleComponent() {
-  const [loginRequest, { data: loginResponse, error }] = useLoginUserMutation();
+  const [loginRequest, { error }] = useLoginUserMutation();
   // 1. delcare object using with useForm
   const { register, handleSubmit, reset, setError } = useForm({
     // 2. set default values

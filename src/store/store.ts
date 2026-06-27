@@ -3,6 +3,7 @@ import { countSlice } from '@/features/countSlice/countSlice';
 import { ecommerceApi } from '@/services/ecommerce';
 import {configureStore} from '@reduxjs/toolkit'
 import { authApi} from '@/services/auth';
+import { uploadApi } from '@/services/uploadApi';
 
 // set up the store
 export const makeStore = () => {
@@ -10,10 +11,11 @@ export const makeStore = () => {
     reducer: {
       count: countSlice.reducer, 
       [ecommerceApi.reducerPath]: ecommerceApi.reducer,
-      [authApi.reducerPath]: authApi.reducer
+      [authApi.reducerPath]: authApi.reducer,
+      [uploadApi.reducerPath]:uploadApi.reducer
     },
     middleware: (getDefaultMiddleware) => 
-      getDefaultMiddleware().concat(ecommerceApi.middleware, authApi.middleware)
+      getDefaultMiddleware().concat(ecommerceApi.middleware, authApi.middleware,uploadApi.middleware)
   
     
   }) 

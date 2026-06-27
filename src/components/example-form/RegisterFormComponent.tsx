@@ -91,6 +91,7 @@ export default function RegisterFormComponent() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="space-y-5">
+          
           {/* Username */}
           <div className="space-y-2">
             <Label htmlFor="username">Username</Label>
