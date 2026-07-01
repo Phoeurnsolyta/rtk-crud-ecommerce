@@ -56,9 +56,7 @@ export default function ProductFormComponent() {
     name: "color",
   });
 
-  // IMAGES — array of plain strings. React Hook Form's useFieldArray does NOT
-  // support primitive arrays (it spreads each item, which mangles strings),
-  // so this is managed manually via watch/setValue instead.
+
   const images = watch("images") ?? [];
 
   const addImage = () => {
@@ -180,10 +178,7 @@ export default function ProductFormComponent() {
       </div>
 
       <UploadFileFormComponent />
-      {/* NOTE: thumbnail is required by the schema but nothing currently calls
-          setValue("thumbnail", ...) — wire this up to whatever upload-complete
-          callback UploadFileFormComponent exposes. */}
-
+   
       <input
         {...register("warranty")}
         placeholder="Warranty"
